@@ -33,9 +33,3 @@ seed:
 node:
 	docker-compose run --rm node run dev
 .PHONY:	check
-
-reset:
-    npm cache clear --force
-    npm install
-	docker-compose run --rm node run dev
-.PHONY:	reset
