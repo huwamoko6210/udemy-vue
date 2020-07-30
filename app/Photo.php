@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use App\User;
 use Illuminate\Support\Facades\Storage;
+use App\Comment;
 
 class Photo extends Model
 {
@@ -21,7 +22,7 @@ class Photo extends Model
 
     /** JSONに含める属性 */
     protected $visible = [
-        'id', 'owner', 'url',
+        'id', 'owner', 'url','comments'
     ];
 
     /** IDの桁数 */
@@ -76,6 +77,15 @@ class Photo extends Model
     }
 
     /**
+     * リレーションシップ - commentsテーブル
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class)->orderBy('id', 'desc');
+    }
+
+    /**
      * アクセサ - url
      * @return string
      */
@@ -83,4 +93,6 @@ class Photo extends Model
     {
         return Storage::cloud()->url($this->attributes['filename']);
     }
+
+
 }
