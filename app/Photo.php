@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 
 class Photo extends Model
 {
-    protected $perPage = 1;
+    protected $perPage = 15;
 
     /** JSONに含める属性 */
     protected $appends = [

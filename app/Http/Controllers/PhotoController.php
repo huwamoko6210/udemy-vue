@@ -14,7 +14,7 @@ class PhotoController extends Controller
     public function __construct()
     {
         // 認証が必要
-        $this->middleware('auth')->except(['index', 'download']);
+        $this->middleware('auth')->except(['index', 'download', 'show']);
     }
 
     /**
@@ -29,9 +29,24 @@ class PhotoController extends Controller
     }
 
     /**
+     * 写真詳細
+     *
+     * @param string $id
+     * @return void
+     */
+    public function show(string $id)
+    {
+        $photo = Photo::where('id', $id)->with(['owner'])->first();
+
+        return $photo ?? abort(404);
+    }
+
+    /**
      * 写真投稿
+     *
      * @param StorePhoto $request
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function create(StorePhoto $request)
     {
