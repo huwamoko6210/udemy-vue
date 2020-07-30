@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Storage;
 
 class Photo extends Model
 {
+    protected $perPage = 1;
+
     /** JSONに含める属性 */
     protected $appends = [
         'url',
